@@ -16,10 +16,10 @@ Simulated a full enterprise environment with Active Directory, user/group provis
 
 Designed and implemented a logical Active Directory structure for `ajx.local`, including custom Organizational Units (OUs) for department-specific user and group management. User accounts were provisioned across these OUs, and security groups were created (e.g., `AJX_Staff`, `Finance_Staff`) to facilitate streamlined access control and policy application.
 
-![AD Organizational Unit Structure](Screenshots/aduc_ous_and_groups.png.png)
+![AD Organizational Unit Structure](ScreenshotsScreenshots/aduc_ous_and_groups.png.png)
 *Visual representation of the custom OU structure within Active Directory Users and Computers.*
 
-![User Account Membership](Screenshots/aduc_user_member_of_group.png)
+![User Account Membership](ScreenshotsScreenshots/aduc_user_member_of_group.png)
 *Demonstrates a user account's membership in relevant security groups, crucial for permissions and GPO targeting.*
 
 ---
@@ -42,7 +42,7 @@ Implemented restrictive GPOs to enhance endpoint security for standard users, pr
 ![GPO Configured Lockdowns](Screenshots/lockdown gpo on drive z.png)
 *Displays the configured GPO settings in the Group Policy Management Editor, including policies to disable Control Panel, Command Prompt, and Task Manager.*
 
-![GPO Lockdown Effect](Screenshots/gpo_user_tskmgrblocked_lockdowgpi.jpg)
+![GPO Lockdown Effect](ScreenshotsScreenshots/gpo_user_tskmgrblocked_lockdowgpi.jpg)
 *Validation of GPO enforcement: A standard user's attempt to access Task Manager is blocked by policy.*
 
 ### GPO Drive Mapping
@@ -72,12 +72,12 @@ Utilized `Get-WinEvent` with advanced filtering and regex to efficiently parse W
 ![Raw Get-WinEvent Output](Screenshots/getwinvent filterhashtable.png)
 *Demonstrates the raw output from a targeted `Get-WinEvent` query, highlighting the ability to filter and retrieve specific security events.*
 
-![Exported Failed Logins CSV](Screenshots/failedips.jpg)
+![Exported Failed Logins CSV](ScreenshotsScreenshots/failedips.jpg)
 *Content of an exported CSV file, showing structured failed login data (TimeCreated, IPAddress), ready for auditing.*
 
 All generated log data (CSV files) is stored in a dedicated, shared directory on the domain controller, accessible for centralized security analysis.
 
-![Shared Logs Directory](Screenshots/csv.jpg)
+![Shared Logs Directory](ScreenshotsScreenshots/csv.jpg)
 *File Explorer view of the designated `C:\AJXShared\Logs` directory, confirming the presence of generated audit CSV files.*
 
 ---
