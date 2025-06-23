@@ -32,7 +32,7 @@ Configured robust file system security using NTFS permissions and enforced secur
 
 Granular NTFS permissions were applied to shared network drives, ensuring that only authorized security groups (e.g., `AJX_Staff`) had appropriate access levels (e.g., Modify) to sensitive data.
 
-![NTFS Folder Permissions](Screenshots/ntfs .jpg)
+![NTFS Folder Permissions](Screenshots/ntfs .png)
 *Screenshot of the NTFS security tab, showing explicit permissions granted to a custom security group on a shared folder.*
 
 ### Group Policy Object (GPO) Lockdowns
@@ -42,7 +42,7 @@ Implemented restrictive GPOs to enhance endpoint security for standard users, pr
 ![GPO Configured Lockdowns](Screenshots/lockdown gpo on drive z.png)
 *Displays the configured GPO settings in the Group Policy Management Editor, including policies to disable Control Panel, Command Prompt, and Task Manager.*
 
-![GPO Lockdown Effect](Screenshots/gpo_user_tskmgrblocked_lockdowgpi.jpg)
+![GPO Lockdown Effect](Screenshots/gpo_user_tskmgrblocked_lockdowgpi.png)
 *Validation of GPO enforcement: A standard user's attempt to access Task Manager is blocked by policy.*
 
 ### GPO Drive Mapping
@@ -62,7 +62,7 @@ Developed PowerShell scripts to perform real-time security monitoring, focusing 
 
 A continuous PowerShell script simulates a Security Information and Event Management (SIEM) dashboard, providing a live, console-based view of failed login attempts, including timestamps, usernames, and source IP addresses.
 
-![Live Failed Login Dashboard](Screenshots/failed login dashboard.jpg)
+![Live Failed Login Dashboard](Screenshots/failed login dashboard.png)
 *Screenshot of the PowerShell console displaying the dynamic, real-time failed login event dashboard.*
 
 ### Log Parsing and Data Export
@@ -72,12 +72,12 @@ Utilized `Get-WinEvent` with advanced filtering and regex to efficiently parse W
 ![Raw Get-WinEvent Output](Screenshots/getwinvent filterhashtable.png)
 *Demonstrates the raw output from a targeted `Get-WinEvent` query, highlighting the ability to filter and retrieve specific security events.*
 
-![Exported Failed Logins CSV](Screenshots/failedips.jpg)
+![Exported Failed Logins CSV](Screenshots/failedips.png)
 *Content of an exported CSV file, showing structured failed login data (TimeCreated, IPAddress), ready for auditing.*
 
 All generated log data (CSV files) is stored in a dedicated, shared directory on the domain controller, accessible for centralized security analysis.
 
-![Shared Logs Directory](Screenshots/csv.jpg)
+![Shared Logs Directory](Screenshots/csv.png)
 *File Explorer view of the designated `C:\AJXShared\Logs` directory, confirming the presence of generated audit CSV files.*
 
 ---
