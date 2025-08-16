@@ -82,24 +82,24 @@ All generated log data (CSV files) is stored in a dedicated, shared directory on
 
 ---
 
-# Automated Failed Logon Monitoring with PowerShell and Task Scheduler
+# Windows Server 2022 Megalab: Automated Failed Logon Monitoring
 
-This project demonstrates a simple yet effective method for automated security log analysis on a Windows Server. Using a PowerShell script and Windows Task Scheduler, the solution continuously monitors for failed login attempts (Event ID 4625), extracts key information, and exports the data to a structured CSV file for auditing and analysis.
+This project is an **extension of my Windows Server 2022 Megalab**, which simulated an enterprise environment with Active Directory and Group Policy. To enhance the security posture of the lab, this component demonstrates a simple yet effective method for automated security log analysis on a Windows Server.
+
+Using a PowerShell script and Windows Task Scheduler, the solution continuously monitors for failed login attempts (Event ID 4625), extracts key information, and exports the data to a structured CSV file for auditing and analysis.
 
 ---
 
 ## 🚀 Project Overview
 
-The goal of this project was to create a hands-off, operational system for tracking failed login attempts on a Windows machine. This "SIEM-lite" approach combines scripting and system automation to transform raw security events into actionable, persistent data.
+Building upon the foundation of the Megalab, the goal of this project was to create a hands-off, operational system for tracking failed login attempts on a Windows machine. This "SIEM-lite" approach combines scripting and system automation to transform raw security events into actionable, persistent data.
 
-The project is broken down into three main components:
+The project is broken into three main components:
 * **Scripting:** A PowerShell script (`FailedLogins.ps1`) to query and parse the Windows Security Event Log.
 * **Automation:** Windows Task Scheduler to run the script at regular intervals.
 * **Data Management:** Centralized storage of output logs in a dedicated directory.
 
----
-
-## ⚙️ How It Works
+⚙️ How It Works
 
 ### 1. Script Development
 
