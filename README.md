@@ -72,7 +72,7 @@ Utilized `Get-WinEvent` with advanced filtering and regex to efficiently parse W
 ![Raw Get-WinEvent Output](ScreenshotsScreenshots/powershell_getwinevent_parsing.png)
 *Demonstrates the raw output from a targeted `Get-WinEvent` query, highlighting the ability to filter and retrieve specific security events.*
 
-![Exported Failed Logins CSV](ScreenshotsScreenshots/failed_logins_csv_content_parsed.jpg.png)
+![Exported Failed Logins CSV](ScreenshotsScreenshots/failed_logins_csv_content_parsed.png)
 *Content of an exported CSV file, showing structured failed login data (TimeCreated, IPAddress), ready for auditing.*
 
 All generated log data (CSV files) is stored in a dedicated, shared directory on the domain controller, accessible for centralized security analysis.
@@ -82,10 +82,52 @@ All generated log data (CSV files) is stored in a dedicated, shared directory on
 
 ---
 
+🔐 Failed Logins Automation Extension
+
+To extend the original Megalab project, a fully automated failed login monitoring system was implemented using PowerShell and Task Scheduler. This extension ensures that failed logon attempts (Event ID 4625) are continuously tracked, exported, and available for auditing without manual intervention.
+
+PowerShell Script: FailedLogins.ps1 (ScreenshotsScreenshots/FailedLginsps1innotepad.png)
+The script collects recent failed login events from the Security log, extracts the timestamp, username, and source process, and exports the data to a centralized CSV file. This allows for easy review and historical analysis.
+
+Script Location:(ScreenshotsScreenshots/FailedLoginsps1location.png)
+
+
+The script resides in C:\AJXShared\Logs\Scripts\, keeping it organized alongside log data.
+
+Script Contents:(ScreenshotsScreenshots/FailedLoginsps1location.png)
+
+
+The script uses Get-WinEvent with a filter for Event ID 4625, loops through each event to create a custom object, and exports the collection to FailedLogins.csv.
+
+Task Scheduler Automation(ScreenshotsScreenshots/tskschedulerproperties.png)
+Task Scheduler was configured to run the script every 15 minutes. This automates the process, ensuring the CSV file is always up-to-date without manual execution.
+
+Task Scheduler Status:(ScreenshotsScreenshots/taskscheduler.png)
+
+
+The screenshot confirms that the scheduled task runs successfully and updates the log file on schedule.
+
+CSV Output:(ScreenshotsScreenshots/FailedLoginscsv.png)
+The resulting CSV file provides a structured record of failed login attempts, including the exact time, username, and source process.
+
+Sample CSV Output:
+
+
+The CSV captures multiple failed attempts, enabling quick auditing and analysis.
+
+Simulated Failed Login:(ScreenshotsScreenshots/PwshAdminWrongpassowrd.png)
+To test the automation, a fake failed login was generated using PowerShell, simulating an incorrect administrator password. This ensures the script detects and logs events as expected.
+
+Fake Login Demonstration:(ScreenshotsScreenshots/PwshAdminWrongpassowrd.png)
+
+
+The screenshot shows the simulated failed login, which appears in the CSV after the scheduled task runs.
+
+This extension solidifies the project’s SIEM-lite functionality, making the monitoring of failed logins fully automated, auditable, and verifiable.
+
 ## 🧩 What’s Next
 
 -   **Azure Cloud VM Deployment:** Extend the environment to Azure for hybrid cloud management and integration.
--   **Task Scheduler Log Scans:** Implement scheduled PowerShell tasks for automated, periodic log analysis and reporting.
 -   **Email Alerting:** Configure PowerShell scripts to send email notifications for critical security events, such as brute-force attempts.
 -   **GPO-Based Account Lockouts:** Implement advanced GPO settings to automatically lock out user accounts after a defined number of failed login attempts, enhancing brute-force protection.
 
