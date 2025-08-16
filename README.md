@@ -141,7 +141,7 @@ I then confirmed that the events were correctly recorded in the Windows Event Lo
 
 To make the solution truly automated, I used Windows Task Scheduler to run the PowerShell script every 15 minutes. This transforms a one-time script into a continuous monitoring system.
 
-![Task Scheduler](ScreenshotsScreenshots/Taskscheduler.png)
+![Task Scheduler](ScreenshotsScreenshots/taskscheduler.png)
 ![Task Scheduler triggers](ScreenshotsScreenshots/tskschedulerproperties.png)
 
 
