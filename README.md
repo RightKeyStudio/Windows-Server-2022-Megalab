@@ -82,163 +82,87 @@ All generated log data (CSV files) is stored in a dedicated, shared directory on
 
 ---
 
- # Automated Failed Logon Monitoring with PowerShell and Task Scheduler
-
-
+# Automated Failed Logon Monitoring with PowerShell and Task Scheduler
 
 This project demonstrates a simple yet effective method for automated security log analysis on a Windows Server. Using a PowerShell script and Windows Task Scheduler, the solution continuously monitors for failed login attempts (Event ID 4625), extracts key information, and exports the data to a structured CSV file for auditing and analysis.
 
-
-
 ---
-
-
 
 ## 🚀 Project Overview
 
-
-
 The goal of this project was to create a hands-off, operational system for tracking failed login attempts on a Windows machine. This "SIEM-lite" approach combines scripting and system automation to transform raw security events into actionable, persistent data.
 
-
-
 The project is broken down into three main components:
-
-* **Scripting:** A PowerShell script (FailedLogins.ps1) to query and parse the Windows Security Event Log.
-
+* **Scripting:** A PowerShell script (`FailedLogins.ps1`) to query and parse the Windows Security Event Log.
 * **Automation:** Windows Task Scheduler to run the script at regular intervals.
-
 * **Data Management:** Centralized storage of output logs in a dedicated directory.
 
-
-
 ---
-
-
 
 ## ⚙️ How It Works
 
-
-
 ### 1. Script Development
 
-
-
-The core of the project is the FailedLogins.ps1 script, which automates the process of querying the Security Event Log.
-
-
+The core of the project is the `FailedLogins.ps1` script, which automates the process of querying the Security Event Log.
 
 ![Failed Logins.ps1](ScreenshotsScreenshots/FailedLginsps1innotepad.png)
+*The image shows the source code of the `FailedLogins.ps1` PowerShell script. It demonstrates the use of `Get-WinEvent` to filter for **Event ID 4625**, the use of `ForEach-Object` to iterate through the events, and the creation of a `PSCustomObject` to structure the output data. The script extracts specific properties, such as `TimeCreated`, `UserName`, and `IPAddress`, and then pipes the results to `Export-Csv`, ensuring the output is a clean, structured CSV file.*
 
-*The image shows the source code of the FailedLogins.ps1 PowerShell script. It demonstrates the use of Get-WinEvent to filter for **Event ID 4625**, the use of ForEach-Object to iterate through the events, and the creation of a PSCustomObject to structure the output data. The script extracts specific properties, such as TimeCreated, UserName, and IPAddress, and then pipes the results to Export-Csv, ensuring the output is a clean, structured CSV file.*
-
-
-The Script was put in it's own folder on the C: drive
-
+The script was placed in its own dedicated folder to ensure clean organization.
 
 ![FailedLogins.ps1 location](ScreenshotsScreenshots/FailedLoginsps1location.png)
-
-*the image shows that the FailedLogins.ps1 is under (C:\Scripts\)*
-
-
+*The image shows that the `FailedLogins.ps1` is located under `C:\Scripts`, separating it from the log output directory.*
 
 ### 2. Event Log Validation and Testing
 
-
-
 Before building the full automation, I validated that failed login events are correctly logged by the system and contain the necessary data. I generated test events by intentionally entering a wrong password.
 
+![CMD Fake Login](ScreenshotsScreenshots/cmdfakelogin.png)
+![Wrong Password](ScreenshotsScreenshots/powershelladminwrongpassword.png)
+*These images show a simulated failed login attempt using either the `runas` command or `Start-Process` with a deliberately incorrect password. This action generates the failed logon event (**Event ID 4625**) in the Security event log, which the main script is designed to detect and log.*
 
+I then confirmed that the events were correctly recorded in the Windows Event Log using PowerShell.
 
-![CMD Fake Login](ScreenshotsScreenshots/cmdfakelogin.png)  
-![Wrong Passowrd](ScreenshotsScreenshots/powershelladminwrongpassword.png)
-
-*These images show a simulated failed login attempt using either the runas command or Start-Process with a deliberately incorrect password. This action generates the failed logon event (**Event ID 4625**) in the Security event log, which the main script is designed to detect and log.*
-
-
-
-![Get-WinEvent](ScreenshotsScreenshots/Winvent4625.png)  
+![Get-WinEvent](ScreenshotsScreenshots/Winvent4625.png)
 ![Get-WinEvent Log](ScreenshotsScreenshots/Winvent5.png)
-
-*These images display the output of the Get-WinEvent PowerShell command, confirming that failed login attempts are being successfully recorded in the Windows Event Log with the correct Event ID. They also show a detailed view of a single failed login event, confirming the event contains all the necessary information, such as username and IP address, that the script needs to parse.*
-
-
+*These images display the output of the `Get-WinEvent` PowerShell command, confirming that failed login attempts are being successfully recorded in the Windows Event Log with the correct Event ID. They also show a detailed view of a single failed login event, confirming the event contains all the necessary information, such as username and IP address, that the script needs to parse.*
 
 ---
-
-
 
 ## 🏃 Automation & End-to-End Functionality
 
-
-
 To make the solution truly automated, I used Windows Task Scheduler to run the PowerShell script every 15 minutes. This transforms a one-time script into a continuous monitoring system.
 
-
-
-![Task Scheduler](ScreenshotsScreenshots/Taskscheduler.png)![Task Scheduler triggers](ScreenshotsScreenshots/tskschedulerproperties.png)
-
+![Task Scheduler](ScreenshotsScreenshots/Taskscheduler.png)
+![Task Scheduler triggers](ScreenshotsScreenshots/tskschedulerproperties.png)
 *These images show the main view of the Windows Task Scheduler and the "Edit Trigger" window for the "AJX Failed Logins" task. The trigger is configured to repeat the task every 15 minutes indefinitely, providing a near-real-time monitoring system.*
 
-
+The final end-to-end functionality was confirmed by simultaneously viewing the Task Scheduler and the log file.
 
 ![Confirmation](ScreenshotsScreenshots/Factsrun.png)
-
-*This composite screenshot serves as proof of the full end-to-end automation process. It simultaneously shows the Windows Task Scheduler, with the "AJX Failed Logins" task running successfully, and a Notepad window displaying the populated FailedLogins.csv file. This demonstrates that the scheduler is successfully executing the PowerShell script, and the script is, in turn, successfully writing the failed login data to the CSV file.*
-
-
+*This composite screenshot serves as proof of the full end-to-end automation process. It simultaneously shows the Windows Task Scheduler, with the "AJX Failed Logins" task running successfully, and a Notepad window displaying the populated `FailedLogins.csv` file. This demonstrates that the scheduler is successfully executing the PowerShell script, and the script is, in turn, successfully writing the failed login data to the CSV file.*
 
 ---
-
-
 
 ## 📁 Log Management & Output
 
-
-
-All log files generated by the script are stored in a centralized, dedicated directory (C:\AJXShared\Logs). This is a key best practice for log management, as it makes data easy to access for analysis and auditing.
-
+All log files generated by the script are stored in a centralized, dedicated directory (`C:\AJXShared\Logs`). This is a key best practice for log management, as it makes data easy to access for analysis and auditing.
 
 ![Location](ScreenshotsScreenshots/Folderslocation.png)
+*This image shows a Windows Explorer view of `C:\AJXShared\Logs`, confirming the presence of the log files. Storing these logs in a single, dedicated folder is a key principle of security information and event management (SIEM).*
 
+The final output is a persistent, structured CSV file (`FailedLogins.csv`), which serves as an auditable record of all failed login attempts. This data can be easily imported into other tools for further analysis.
 
-*These images show a Windows Explorer pointing to (C:)\AJXShare\Logs, confirming the presence of the log files. Storing these logs in a single, dedicated folder is a key principle of security information and event management (SIEM).*
-
-
-
-The final output is a persistent, structured CSV file (FailedLogins.csv), which serves as an auditable record of all failed login attempts. This data can be easily imported into other tools for further analysis.
-
-
-
-This is where you would put ![](ScreenshotsScreenshots/Namedate.png)
-
-*These images display either a PowerShell console showing the output of a command to import and display the last five entries from the CSV file, or the full contents of the file itself. This proves the PowerShell script is correctly exporting data into a structured CSV format, with a complete history of failed authentications.*
-
-
+![CSV Output](ScreenshotsScreenshots/Namedate.png)
+*This image displays a PowerShell console showing the output of a command to import and display the last five entries from the CSV file. This proves the PowerShell script is correctly exporting data into a structured CSV format, with a complete history of failed authentications.*
 
 ---
-
-
 
 ## ✅ Skills Demonstrated
 
-
-
 This project showcases a practical application of several valuable skills:
 
-
-
 * **Scripting:** Developed a custom PowerShell script to solve a specific security problem.
-
 * **Automation:** Used native system tools (**Task Scheduler**) to automate a process.
-
 * **Problem-Solving:** Created an end-to-end solution from event generation to data output.
-
 * **Security Principles:** Applied core concepts of log analysis and centralized log management.
-## 🧩 What’s Next
-
--   **Azure Cloud VM Deployment:** Extend the environment to Azure for hybrid cloud management and integration.
--   **Email Alerting:** Configure PowerShell scripts to send email notifications for critical security events, such as brute-force attempts.
--   **GPO-Based Account Lockouts:** Implement advanced GPO settings to automatically lock out user accounts after a defined number of failed login attempts, enhancing brute-force protection.
-
----
