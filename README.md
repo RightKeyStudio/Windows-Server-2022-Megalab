@@ -168,7 +168,7 @@ To make the solution truly automated, I used Windows Task Scheduler to run the P
 
 
 
-![Task Scheduler](ScreenshotsScreenshots/Taskscheduler.png) and 
+!(ScreenshotsScreenshots/Taskscheduler.png)
 ![Task Scheduler triggers](ScreenshotsScreenshots/tskschedulerproperties.png)
 
 *These images show the main view of the Windows Task Scheduler and the "Edit Trigger" window for the "AJX Failed Logins" task. The trigger is configured to repeat the task every 15 minutes indefinitely, providing a near-real-time monitoring system.*
