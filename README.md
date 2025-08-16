@@ -142,13 +142,15 @@ Before building the full automation, I validated that failed login events are co
 
 
 
-![CMD Fake Login](ScreenshotsScreenshots/cmdfakelogin.png)  ![Wrong Passowrd](ScreenshotsScreenshots/powershelladminwrongpassword.png)
+![CMD Fake Login](ScreenshotsScreenshots/cmdfakelogin.png)  
+![Wrong Passowrd](ScreenshotsScreenshots/powershelladminwrongpassword.png)
 
 *These images show a simulated failed login attempt using either the runas command or Start-Process with a deliberately incorrect password. This action generates the failed logon event (**Event ID 4625**) in the Security event log, which the main script is designed to detect and log.*
 
 
 
-![Get-WinEvent](ScreenshotsScreenshots/Winvent4625.png)  ![Get-WinEvent Log](ScreenshotsScreenshots/Winvent5.png)
+![Get-WinEvent](ScreenshotsScreenshots/Winvent4625.png)  
+![Get-WinEvent Log](ScreenshotsScreenshots/Winvent5.png)
 
 *These images display the output of the Get-WinEvent PowerShell command, confirming that failed login attempts are being successfully recorded in the Windows Event Log with the correct Event ID. They also show a detailed view of a single failed login event, confirming the event contains all the necessary information, such as username and IP address, that the script needs to parse.*
 
@@ -166,7 +168,8 @@ To make the solution truly automated, I used Windows Task Scheduler to run the P
 
 
 
-![Task Scheduler](ScreenshotsScreenshots/Taskscheduler.png) and ![Task Scheduler triggers](ScreenshotsScreenshots/tskschedulerproperties.png)
+![Task Scheduler](ScreenshotsScreenshots/Taskscheduler.png) and 
+![Task Scheduler triggers](ScreenshotsScreenshots/tskschedulerproperties.png)
 
 *These images show the main view of the Windows Task Scheduler and the "Edit Trigger" window for the "AJX Failed Logins" task. The trigger is configured to repeat the task every 15 minutes indefinitely, providing a near-real-time monitoring system.*
 
