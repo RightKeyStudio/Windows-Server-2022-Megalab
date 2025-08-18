@@ -1,4 +1,4 @@
-# 🧠 🛡️ Windows Server 2022 Enterprise Lab & SIEM Automation
+# 🧠 Windows Server 2022 Enterprise Lab & SIEM Automation
 
 Built a full-scale Windows Server 2022 enterprise environment, including Active Directory, OU/user/group management, NTFS permissions, and Group Policy enforcement. Enhanced the lab with a PowerShell-driven automated SIEM-lite system to monitor, parse, and export failed login attempts, demonstrating advanced cybersecurity and systems administration skills.
 
