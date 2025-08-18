@@ -1,15 +1,15 @@
-# 🧠 Windows Server 2022 Megalab Project
+# 🧠 🛡️ Windows Server 2022 Enterprise Lab & SIEM Automation
 
-Simulated a full enterprise environment with Active Directory, user/group provisioning, NTFS permissions, Group Policy, and PowerShell-based log analysis tools. This project showcases practical cybersecurity and systems administration skills.
+Built a full-scale Windows Server 2022 enterprise environment, including Active Directory, OU/user/group management, NTFS permissions, and Group Policy enforcement. Enhanced the lab with a PowerShell-driven automated SIEM-lite system to monitor, parse, and export failed login attempts, demonstrating advanced cybersecurity and systems administration skills.
 
 ## ✅ Key Skills Demonstrated
 
--   **Active Directory Management:** User and group provisioning, Organizational Unit (OU) design.
--   **NTFS Permission Control:** Implementing granular folder access permissions.
--   **Group Policy Objects (GPO):** Configuring and enforcing security policies (e.g., UI lockdowns, drive mapping).
--   **PowerShell Scripting:** Advanced log parsing, data extraction, and CSV export.
--   **Security Information & Event Management (SIEM) Lite:** Real-time login failure monitoring (Event ID 4625) and threat IP extraction using PowerShell.
-
+-   **Active Directory Management: Custom OU design, user provisioning, security group implementation.**
+-   **NTFS Permission Control: Granular folder access and shared drive security.**
+-   **Group Policy Objects (GPO): Endpoint security enforcement, drive mapping, UI lockdowns.**
+-   **PowerShell Automation: Real-time log parsing, failed login monitoring, CSV data export.**
+-   **SIEM-lite Simulation: Continuous tracking of Event ID 4625, structured data collection, and centralized log management.**
+  
 ---
 
 ## 👨‍💻 Phase 1: Active Directory Design & Management
